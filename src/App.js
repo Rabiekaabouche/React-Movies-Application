@@ -145,21 +145,17 @@ function App() {
 					) : (
 						<Grow in>
 							<Grid container alignItems="stretch" spacing={2}>
-								{currentMovies.map(
-									(
-										movie //movies.filteredData...
-									) => (
-										<Grid key={movie.data.id} item sm={6} md={4} xs={12}>
-											<Movie
-												movie={movie.data}
-												setCurrentPage={setCurrentPage}
-												updateLikedBands={updateLikedBands}
-												likedBands={likedBands}
-												liked={movie.details}
-											/>
-										</Grid>
-									)
-								)}
+								{currentMovies.map((movie) => (
+									<Grid key={movie.data.id} item sm={6} md={4} xs={12}>
+										<Movie
+											movie={movie.data}
+											setCurrentPage={setCurrentPage}
+											updateLikedBands={updateLikedBands}
+											likedBands={likedBands}
+											liked={movie.details}
+										/>
+									</Grid>
+								))}
 							</Grid>
 						</Grow>
 					)}

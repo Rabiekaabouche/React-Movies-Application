@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
 	makeStyles,
@@ -6,7 +6,6 @@ import {
 	CardActionArea,
 	CardActions,
 	CardContent,
-	CardMedia,
 	Button,
 	Typography,
 } from "@material-ui/core";
@@ -44,21 +43,8 @@ const useStyles = makeStyles({
 	},
 });
 
-function Movie({ movie, setCurrentPage, updateLikedBands, likedBands, liked }) {
+function Movie({ movie, setCurrentPage, liked }) {
 	const dispatch = useDispatch();
-	const [like, setLike] = useState({
-		countLike: 0,
-		countDislike: 0,
-		wasClicked: false,
-	});
-
-	useEffect(() => {
-		console.log(like);
-	}, [like]);
-
-	//############################################################"
-
-	//####################################### Third version
 
 	const [state, updateState] = useState(false);
 
