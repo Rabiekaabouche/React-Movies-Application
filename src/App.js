@@ -58,7 +58,6 @@ function App() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [moviesPerPage, setMoviesPerPage] = useState(4);
 	const [categoryValue, setCategoryValue] = useState("");
-	const [likedBands, updateLikedBands] = useState([]);
 
 	//Get current movies
 	const indexOfLastMovie = currentPage * moviesPerPage;
@@ -150,8 +149,6 @@ function App() {
 										<Movie
 											movie={movie.data}
 											setCurrentPage={setCurrentPage}
-											updateLikedBands={updateLikedBands}
-											likedBands={likedBands}
 											liked={movie.details}
 										/>
 									</Grid>
