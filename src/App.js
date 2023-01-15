@@ -57,8 +57,9 @@ function App() {
 	const movies = useSelector((state) => state.movies);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [moviesPerPage, setMoviesPerPage] = useState(4);
-	const [categoryValue, setCategoryValue] = useState("");
+	const [categoryValue, setCategoryValue] = useState("all");
 
+	console.log("movies from APP", movies);
 	//Get current movies
 	const indexOfLastMovie = currentPage * moviesPerPage;
 	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
@@ -150,6 +151,8 @@ function App() {
 											movie={movie.data}
 											setCurrentPage={setCurrentPage}
 											liked={movie.details}
+											setCategoryValue={setCategoryValue}
+											category={movies.actualCategory}
 										/>
 									</Grid>
 								))}

@@ -3,6 +3,7 @@ const initialState = {
 	filteredData: [],
 	categories: [],
 	loading: false,
+	actualCategory: "all",
 };
 const movies = (movies = initialState, action) => {
 	switch (action.type) {
@@ -31,9 +32,29 @@ const movies = (movies = initialState, action) => {
 			};
 
 		case "DELETE":
+			
+			const category = movies.actualCategory === "all" ? "all": movies.data
+				.find((movie) => movie.data.id === action.payload)
+				.data.category.toLowerCase();
+
+			console.log("category", category);
+
 			const finalMovies = movies.data.filter(
 				(movie) => movie.data.id !== action.payload
 			);
+
+			let filteredData;
+
+			let moviesSameCategory = finalMovies.filter(
+				(movie) => movie.data.category.toLowerCase() === category
+			);
+			console.log("moviesSameCategory", moviesSameCategory);
+			filteredData = moviesSameCategory.length
+				? moviesSameCategory
+				: finalMovies;
+			const actualCategory = !moviesSameCategory.length ? "all" : category;
+			console.log("actualCategory", actualCategory);
+
 			const lastCategory = [
 				...new Set(
 					finalMovies.map((movie) => movie.data.category.toLowerCase())
@@ -42,8 +63,9 @@ const movies = (movies = initialState, action) => {
 
 			return {
 				data: finalMovies,
-				filteredData: finalMovies,
+				filteredData: filteredData,
 				categories: lastCategory,
+				actualCategory: actualCategory,
 			};
 
 		case "FILTER":
@@ -51,8 +73,12 @@ const movies = (movies = initialState, action) => {
 				(movie) => movie.data.category.toLowerCase() === action.payload
 			);
 			if (action.payload === "all")
-				return { ...movies, filteredData: movies.data };
-			return { ...movies, filteredData: filtered };
+				return { ...movies, filteredData: movies.data, actualCategory: action.payload };
+			return {
+				...movies,
+				filteredData: filtered,
+				actualCategory: action.payload,
+			};
 
 		default:
 			return movies;

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	makeStyles,
 	Card,
@@ -12,6 +12,7 @@ import {
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { deleteMovie } from "../actions/movies";
+import { LocalMovies } from "@material-ui/icons";
 
 const useStyles = makeStyles({
 	iconWrapper: {
@@ -43,10 +44,14 @@ const useStyles = makeStyles({
 	},
 });
 
-function Movie({ movie, setCurrentPage, liked }) {
+function Movie({ movie, setCurrentPage, liked, setCategoryValue, category }) {
 	const dispatch = useDispatch();
 
 	const [state, updateState] = useState(false);
+
+	useEffect(() => {
+		setCategoryValue(category);
+	}, [category, setCategoryValue]);
 
 	const handleLikess = () => {
 		if (!liked.isLiked) {
